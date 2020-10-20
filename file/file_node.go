@@ -3,6 +3,7 @@ package file
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"path/filepath"
 	"reflect"
 	"strings"
@@ -19,6 +20,7 @@ func decodeFileToNode(filePath string, filters ...string) (*parser.Node, error) 
 	if err != nil {
 		return nil, err
 	}
+	content = []byte(os.ExpandEnv(string(content)))
 
 	data := make(map[string]interface{})
 
